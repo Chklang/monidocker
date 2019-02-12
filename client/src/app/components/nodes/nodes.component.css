@@ -1,0 +1,13 @@
+.node-infos {
+    border: 1px black solid;
+}
+.containers-found > li {
+    list-style-type: none;
+}
+.containers-found > li > .img-status {
+    width: 24px;
+}
+
+.node_status > .img-status {
+    width: 24px;
+}

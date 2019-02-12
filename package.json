@@ -1,0 +1,31 @@
+{
+  "name": "@monidocker/app",
+  "version": "1.0.0",
+  "description": "Monitoring docker servers",
+  "main": "index.js",
+  "scripts": {
+    "copy:rootfiles": "cpy --parents package.json bin/** README.md .npmrc dist/",
+    "copy:clientfiles": "cpy --parents --cwd=client/dist/moniker-client ** ../../../dist/lib-client",
+    "copy:serverfiles": "cpy --parents --cwd=server/dist/lib ** ../../../dist/lib-server",
+    "copy:all": "npm run copy:rootfiles && npm run copy:clientfiles && npm run copy:serverfiles",
+    "dist": "npm run build && npm run copy:all && npm run modifyPackagejson",
+    "modifyPackagejson": "node merge-packagejson.js",
+    "build:api": "cd api && npm run build && cd .. && cpy --parents --cwd=api/src ** ../../client/src/app/api/ && cpy --parents --cwd=api/src ** ../../server/src/api/",
+    "build:client": "cd client && npm run build -- --prod && cd ..",
+    "build:server": "cd server && npm run dist && cd ..",
+    "build": "npm run build:api && npm run build:client && npm run build:server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "cd server && npm i && cd ../client && npm i && cd ../api && npm i"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cpy-cli": "^2.0.0"
+  },
+  "dependencies": {
+    "fs-extra": "^7.0.1"
+  },
+  "bin": {
+    "monidocker": "./bin/monidocker"
+  }
+}

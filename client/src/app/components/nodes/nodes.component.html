@@ -1,0 +1,39 @@
+<div class="container-fluid" style="height: 100%;">
+  <div class="row" *ngIf="stepLoad !== EStepLoad.FINISHED" style="height: 100%;display: flex;justify-content: center;align-items: center;text-align: center;">
+    <div class="border border-primary rounded" style="max-width: 300px; padding: 10px;">
+      <div *ngIf="stepLoad === EStepLoad.INITIALIZATION">
+        Initialization...
+      </div>
+      <div *ngIf="stepLoad === EStepLoad.LOADNODES">
+        Chargement de la liste des noeuds...
+      </div>
+      <div *ngIf="stepLoad === EStepLoad.LOADCONTAINERS">
+        Chargement des informations de chaque noeud : {{detailsCurrentValue}}/{{detailsMaxValue}}
+      </div>
+      Global :
+      <progressbar [max]="stepLoadMaxValue" [value]="stepLoadCurrentValue"></progressbar>
+      Current part :
+      <progressbar [max]="detailsMaxValue" [value]="detailsCurrentValue"></progressbar>
+    </div>
+  </div>
+  <div class="row" *ngIf="stepLoad === EStepLoad.FINISHED">
+    <div class="col-md-4 node-infos rounded" *ngFor="let node of nodes">
+      <span>node: {{node.name}}</span>
+      <span *ngIf="node.state === EState.DOWN" class="node_status">
+        <img src="/assets/status-red.png" class="img-status" /> OFFLINE
+      </span>
+      <ul *ngIf="node.state === EState.UP">
+        <li>Url API : {{node.url}}</li>
+        <li>Containers :
+          <ul class="containers-found">
+            <li *ngFor="let container of node.containers">
+              <img [src]="containerStateToImg(container)" class="img-status" />
+              <span *ngFor="let name of container.names">{{name}}</span>
+              <button type="button" class="btn btn-primary" (click)="toggleContainer(node, container)">{{containerStateToText(container)}}</button>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

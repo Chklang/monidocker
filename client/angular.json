@@ -1,0 +1,170 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "moniker-client": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/moniker-client",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.app.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/bootstrap.css",
+              "./node_modules/bootstrap-css/lib/alert.css",
+              "./node_modules/bootstrap-css/lib/badge.css",
+              "./node_modules/bootstrap-css/lib/breadcrumb.css",
+              "./node_modules/bootstrap-css/lib/button-group.css",
+              "./node_modules/bootstrap-css/lib/buttons.css",
+              "./node_modules/bootstrap-css/lib/card.css",
+              "./node_modules/bootstrap-css/lib/carousel.css",
+              "./node_modules/bootstrap-css/lib/close.css",
+              "./node_modules/bootstrap-css/lib/code.css",
+              "./node_modules/bootstrap-css/lib/custom-forms.css",
+              "./node_modules/bootstrap-css/lib/custom.css",
+              "./node_modules/bootstrap-css/lib/dropdown.css",
+              "./node_modules/bootstrap-css/lib/forms.css",
+              "./node_modules/bootstrap-css/lib/grid.css",
+              "./node_modules/bootstrap-css/lib/images.css",
+              "./node_modules/bootstrap-css/lib/input-group.css",
+              "./node_modules/bootstrap-css/lib/jumbotron.css",
+              "./node_modules/bootstrap-css/lib/list-group.css",
+              "./node_modules/bootstrap-css/lib/media.css",
+              "./node_modules/bootstrap-css/lib/modal.css",
+              "./node_modules/bootstrap-css/lib/nav.css",
+              "./node_modules/bootstrap-css/lib/navbar.css",
+              "./node_modules/bootstrap-css/lib/normalize.css",
+              "./node_modules/bootstrap-css/lib/pagination.css",
+              "./node_modules/bootstrap-css/lib/popover.css",
+              "./node_modules/bootstrap-css/lib/print.css",
+              "./node_modules/bootstrap-css/lib/progress.css",
+              "./node_modules/bootstrap-css/lib/reboot.css",
+              "./node_modules/bootstrap-css/lib/responsive-embed.css",
+              "./node_modules/bootstrap-css/lib/tables.css",
+              "./node_modules/bootstrap-css/lib/tooltip.css",
+              "./node_modules/bootstrap-css/lib/transitions.css",
+              "./node_modules/bootstrap-css/lib/type.css",
+              "./node_modules/bootstrap-css/lib/utilities.css",
+              "src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "moniker-client:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "moniker-client:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "moniker-client:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.spec.json",
+            "karmaConfig": "src/karma.conf.js",
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/tsconfig.app.json",
+              "src/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "moniker-client-e2e": {
+      "root": "e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "moniker-client:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "moniker-client:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "moniker-client"
+}

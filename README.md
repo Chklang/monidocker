@@ -17,7 +17,7 @@ services:
     image: chklang/monidocker
     environment:
       - monidocker_port=80
-      - monidocker_hosts="http://192.168.0.1:2345|http://192.168.0.2:2345|http://192.168.0.3:2345"
+      - monidocker_hosts=http://192.168.0.1:2345|http://192.168.0.2:2345|http://192.168.0.3:2345
     ports:
       - 22080:80
 ```
